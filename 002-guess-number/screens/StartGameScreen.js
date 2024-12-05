@@ -1,22 +1,21 @@
-import { StyleSheet, TextInput, View } from "react-native";
+import { Alert, StyleSheet, Text, TextInput, View } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
+import { useState } from "react";
+import { COLORS } from "../utils/constants";
+import Title from "../components/Title";
+import Card from "../components/Card";
+import InstructionText from "../components/InstructionText";
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "#4E0329",
-        marginTop: 100,
-        marginHorizontal: 24,
-        padding: 16,
-        borderRadius: 10,
-        boxShadow: "0 6px 8 rgba(0, 0, 0, 0.3)",
-        alignItems: "center",
+    screenContainer: {
+        marginTop: 50,
     },
 
     input: {
         fontSize: 32,
-        borderBottomColor: "#DDB52F",
+        borderBottomColor: COLORS.accent500,
         borderBottomWidth: 2,
-        color: "#DDB52F",
+        color: COLORS.accent500,
         marginVertical: 8,
         width: 50,
         textAlign: "center",
@@ -31,20 +30,47 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function StartGameScreen() {
+export default function StartGameScreen({ setAppState }) {
+    const [value, setValue] = useState("");
+
+    const handleReset = () => setValue("");
+
+    const handleConfirm = () =>
+        value === "" || isNaN(+value) || +value < 0 || +value > 99
+            ? Alert.alert("Invalid number", "Enter a number between 0 and 99", [
+                  { text: "Okay", style: "destructive", onPress: handleReset },
+              ])
+            : setAppState(s => ({ ...s, userNumber: +value, status: "game" }));
+
     return (
-        <View style={styles.container}>
-            <TextInput
-                style={styles.input}
-                maxLength={2}
-                keyboardType="number-pad"
-                autoCapitalize="none"
-                autoCorrect={false}
-            />
-            <View style={styles.btnsContainer}>
-                <PrimaryButton btnStyle={styles.btn}>Reset</PrimaryButton>
-                <PrimaryButton btnStyle={styles.btn}>Confirm</PrimaryButton>
-            </View>
+        <View style={styles.screenContainer}>
+            <Title style={styles.title}>Guess my Number</Title>
+            <Card>
+                <InstructionText>Enter your number</InstructionText>
+                <TextInput
+                    style={styles.input}
+                    maxLength={2}
+                    keyboardType="number-pad"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    onChangeText={setValue}
+                    value={value}
+                />
+                <View style={styles.btnsContainer}>
+                    <PrimaryButton
+                        btnStyle={styles.btn}
+                        onPress={handleReset}
+                    >
+                        Reset
+                    </PrimaryButton>
+                    <PrimaryButton
+                        btnStyle={styles.btn}
+                        onPress={handleConfirm}
+                    >
+                        Confirm
+                    </PrimaryButton>
+                </View>
+            </Card>
         </View>
     );
 }

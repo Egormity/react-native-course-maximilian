@@ -1,4 +1,5 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
+import { COLORS } from "../utils/constants";
 
 const styles = StyleSheet.create({
     buttonContainer: {
@@ -15,17 +16,17 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function PrimaryButton({ children, onPress, btnStyle = {} }) {
+export default function PrimaryButton({ children, onPress, btnStyle = {}, textStyle }) {
     return (
         <Pressable
             onPress={onPress}
             style={({ pressed }) => ({
                 ...styles.buttonContainer,
                 ...btnStyle,
-                backgroundColor: pressed ? "#640233" : "#72063C",
+                backgroundColor: pressed ? COLORS.primary600 : COLORS.primary500,
             })}
         >
-            <Text style={styles.buttonText}>{children}</Text>
+            <Text style={[styles.buttonText, textStyle]}>{children}</Text>
         </Pressable>
     );
 }
