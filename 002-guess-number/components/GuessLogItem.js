@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     itemText: {
         fontFamily: "open-sans",
         fontSize: 16,
-        color: "white",
+        color: COLORS.primary800,
     },
 });
 

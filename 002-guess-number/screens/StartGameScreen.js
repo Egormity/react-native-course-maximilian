@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TextInput, View } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import { useState } from "react";
 import { COLORS } from "../utils/constants";
@@ -7,8 +7,8 @@ import Card from "../components/Card";
 import InstructionText from "../components/InstructionText";
 
 const styles = StyleSheet.create({
-    screenContainer: {
-        marginTop: 50,
+    screen: {
+        flex: 1,
     },
 
     input: {
@@ -43,34 +43,41 @@ export default function StartGameScreen({ setAppState }) {
             : setAppState(s => ({ ...s, userNumber: +value, status: "game" }));
 
     return (
-        <View style={styles.screenContainer}>
-            <Title style={styles.title}>Guess my Number</Title>
-            <Card>
-                <InstructionText>Enter your number</InstructionText>
-                <TextInput
-                    style={styles.input}
-                    maxLength={2}
-                    keyboardType="number-pad"
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    onChangeText={setValue}
-                    value={value}
-                />
-                <View style={styles.btnsContainer}>
-                    <PrimaryButton
-                        btnStyle={styles.btn}
-                        onPress={handleReset}
-                    >
-                        Reset
-                    </PrimaryButton>
-                    <PrimaryButton
-                        btnStyle={styles.btn}
-                        onPress={handleConfirm}
-                    >
-                        Confirm
-                    </PrimaryButton>
+        <ScrollView>
+            <KeyboardAvoidingView
+                style={styles.screen}
+                behavior="position"
+            >
+                <View>
+                    <Title style={styles.title}>Guess my {Platform.OS === "ios" ? "Balls" : "Number"}</Title>
+                    <Card>
+                        <InstructionText>Enter your number</InstructionText>
+                        <TextInput
+                            style={styles.input}
+                            maxLength={2}
+                            keyboardType="number-pad"
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            onChangeText={setValue}
+                            value={value}
+                        />
+                        <View style={styles.btnsContainer}>
+                            <PrimaryButton
+                                btnStyle={styles.btn}
+                                onPress={handleReset}
+                            >
+                                Reset
+                            </PrimaryButton>
+                            <PrimaryButton
+                                btnStyle={styles.btn}
+                                onPress={handleConfirm}
+                            >
+                                Confirm
+                            </PrimaryButton>
+                        </View>
+                    </Card>
                 </View>
-            </Card>
-        </View>
+            </KeyboardAvoidingView>
+        </ScrollView>
     );
 }

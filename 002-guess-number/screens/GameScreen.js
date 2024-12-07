@@ -1,4 +1,4 @@
-import { Alert, FlatList, StyleSheet, Text, View } from "react-native";
+import { Alert, FlatList, StyleSheet, View } from "react-native";
 import Title from "../components/Title";
 import { useEffect, useState } from "react";
 import { generateRandomNumber } from "../utils/generateRandomNumber";
@@ -12,7 +12,6 @@ import GuessLogItem from "../components/GuessLogItem";
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        marginTop: 50,
     },
 
     btnsContainer: {

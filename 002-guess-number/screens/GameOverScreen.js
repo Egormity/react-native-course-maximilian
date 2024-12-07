@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import Title from "../components/Title";
 import { COLORS } from "../utils/constants";
 import PrimaryButton from "../components/PrimaryButton";
@@ -6,13 +6,10 @@ import PrimaryButton from "../components/PrimaryButton";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 50,
         alignItems: "center",
     },
 
     image: {
-        width: 300,
-        height: 300,
         borderRadius: 9999,
         borderColor: COLORS.primary800,
         borderWidth: 2,
@@ -34,12 +31,20 @@ const styles = StyleSheet.create({
 });
 
 export default function GameOverScreen({ appState, setAppState }) {
+    const { width, height } = useWindowDimensions();
+
     return (
         <View style={styles.container}>
-            <Title>Game over!</Title>
+            <Title style={{ width: "100%" }}>Game over!</Title>
             <Image
                 source={require("../assets/images/success.png")}
-                style={styles.image}
+                style={[
+                    styles.image,
+                    {
+                        width: Math.min(width, height) * 0.85,
+                        height: Math.min(width, height) * 0.85,
+                    },
+                ]}
             />
             {/* prettier-ignore */}
             <Text style={styles.text}>

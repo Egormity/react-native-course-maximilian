@@ -13,6 +13,6 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function Title({ children }) {
-    return <Text style={styles.title}>{children}</Text>;
+export default function Title({ children, style }) {
+    return <Text style={[styles.title, style]}>{children}</Text>;
 }
