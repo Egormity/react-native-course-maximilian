@@ -1,6 +1,8 @@
 import { FlatList, StyleSheet } from "react-native";
 import { MEALS } from "../data/dummy-data";
 import MealItem from "../components/MealItem";
+import { useNavigation } from "@react-navigation/native";
+import { useLayoutEffect } from "react";
 
 const styles = StyleSheet.create({
     container: {
@@ -10,8 +12,13 @@ const styles = StyleSheet.create({
 });
 
 export default function ScreenMealOverview({ route }) {
-    const category = route.params.category;
+    const category = route.params.item;
     const meals = MEALS.filter(meal => meal.categoryIds.includes(category.id));
+
+    const navigation = useNavigation();
+    useLayoutEffect(() => {
+        navigation.setOptions({ title: category.title });
+    }, [navigation, category]);
 
     return (
         <FlatList

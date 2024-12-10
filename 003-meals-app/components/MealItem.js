@@ -1,45 +1,36 @@
+import { useNavigation } from "@react-navigation/native";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import MealDetails from "./MealDetails";
+import DummyImage from "./ImageDummy";
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "center",
+        backgroundColor: "#FFFFFF",
         boxShadow: "0 4 12 rgba(0, 0, 0, 0.3)",
         padding: 10,
         margin: 20,
         borderRadius: 8,
-    },
-    image: {
-        height: 200,
-        width: 230,
     },
     title: {
         fontSize: 18,
         fontWeight: "bold",
         margin: 8,
     },
-    details: {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 12,
-    },
 });
 
 export default function MealItem({ item, styleContainer }) {
+    const navigation = useNavigation();
+
     return (
         <Pressable
             style={({ pressed }) => [styles.container, styleContainer, { opacity: pressed ? 0.75 : 1 }]}
+            onPress={() => navigation.navigate("MealDetails", { item: item })}
         >
-            <Image
-                source={require("../assets/Shrek.png")}
-                style={styles.image}
-            />
+            <DummyImage />
             <Text style={styles.title}>{item.title}</Text>
-            <View style={styles.details}>
-                <Text>{item.duration} min</Text>
-                <Text>{item.complexity.toUpperCase()}</Text>
-                <Text>{item.affordability.toUpperCase()}</Text>
-            </View>
+            <MealDetails item={item} />
         </Pressable>
     );
 }
