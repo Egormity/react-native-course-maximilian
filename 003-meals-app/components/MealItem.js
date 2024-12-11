@@ -1,15 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import MealDetails from "./MealDetails";
 import DummyImage from "./ImageDummy";
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: "center",
         backgroundColor: "#FFFFFF",
         boxShadow: "0 4 12 rgba(0, 0, 0, 0.3)",
-        padding: 10,
+        padding: 20,
         margin: 20,
         borderRadius: 8,
     },

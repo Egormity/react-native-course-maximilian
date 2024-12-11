@@ -3,8 +3,9 @@ import MealDetails from "../components/MealDetails";
 import DummyImage from "../components/ImageDummy";
 import Subtitle from "../components/Subtitle";
 import MealList from "../components/MealList";
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 import ButtonIcon from "../components/ButtonIcon";
+import { useContextFavorites } from "../store/context";
 
 const styles = StyleSheet.create({
     container: {
@@ -24,11 +25,19 @@ const styles = StyleSheet.create({
 });
 
 export default function ScreenMealDetail({ route, navigation }) {
+    const { handleChange, isFavorite } = useContextFavorites();
     const item = route.params.item;
 
     useLayoutEffect(() => {
-        navigation.setOptions({ headerRight: () => <ButtonIcon /> });
-    }, [navigation, item]);
+        navigation.setOptions({
+            headerRight: () => (
+                <ButtonIcon
+                    iconName={isFavorite(item.id) ? "star" : "star-outline"}
+                    onPress={() => handleChange(item.id)}
+                />
+            ),
+        });
+    }, [navigation, item, handleChange, isFavorite]);
 
     return (
         <ScrollView style={styles.container}>

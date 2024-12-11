@@ -16,7 +16,12 @@ export default function MealList({ data, styleContainer }) {
     return (
         <View style={[styles.container, styleContainer]}>
             {data.map(el => (
-                <Text style={styles.item}>{el}</Text>
+                <Text
+                    key={el}
+                    style={styles.item}
+                >
+                    {el}
+                </Text>
             ))}
         </View>
     );
