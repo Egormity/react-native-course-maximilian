@@ -3,27 +3,6 @@ import ExpensesList from "./ExpensesList";
 import ExpensesSummary from "./ExpensesSummary";
 import { GlobalStyles } from "../constants/styles";
 
-const DUMMY = [
-    {
-        id: 1,
-        description: "Test",
-        amount: 123,
-        date: new Date(),
-    },
-    {
-        id: 2,
-        description: "Test 2",
-        amount: 1.23,
-        date: new Date(),
-    },
-    {
-        id: 3,
-        description: "Test 3",
-        amount: 6123,
-        date: new Date(),
-    },
-];
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -33,7 +12,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function ExpensesOutput({ title, data = DUMMY }) {
+export default function ExpensesOutput({ title, data = [] }) {
     return (
         <View style={styles.container}>
             <ExpensesSummary
