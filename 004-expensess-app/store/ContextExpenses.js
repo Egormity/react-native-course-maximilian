@@ -25,7 +25,8 @@ const ContextExpenses = createContext({
 export const ExpensesContextProvider = ({ children }) => {
     const [expenses, setExpenses] = useState(DUMMY_DATA);
 
-    const addExpense = expense => setExpenses(prev => [...prev, expense]);
+    const addExpense = expense =>
+        setExpenses(prev => [...prev, { ...expense, id: Math.random().toString() }]);
     const removeExpense = id => setExpenses(prev => prev.filter(item => item.id !== id));
     const updateExpense = expense =>
         setExpenses(prev => prev.map(item => (item.id === expense.id ? expense : item)));
