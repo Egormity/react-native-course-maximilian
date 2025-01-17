@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { COLORS } from "../constants/colors";
+import PickerImage from "./PickerImage";
 
 const styles = StyleSheet.create({
     container: {
@@ -12,6 +13,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: COLORS.primary500,
         fontSize: 18,
+        marginBottom: 5,
     },
     input: {
         padding: 8,
@@ -25,8 +27,8 @@ export default function FormPlace() {
     const [title, setTitle] = useState("");
 
     return (
-        <ScrollView>
-            <View style={styles.container}>
+        <ScrollView style={styles.container}>
+            <View>
                 <Text style={styles.label}>Title</Text>
                 <TextInput
                     style={styles.input}
@@ -34,6 +36,7 @@ export default function FormPlace() {
                     onChangeText={value => setTitle(value)}
                 />
             </View>
+            <PickerImage />
         </ScrollView>
     );
 }
