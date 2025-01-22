@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { COLORS } from "../constants/colors";
 import PickerImage from "./PickerImage";
+import PickerLocation from "./PickerLocation";
 
 const styles = StyleSheet.create({
     container: {
@@ -20,6 +21,7 @@ const styles = StyleSheet.create({
         color: COLORS.primary500,
         borderWidth: 2,
         borderColor: COLORS.primary500,
+        marginBottom: 10,
     },
 });
 
@@ -37,6 +39,7 @@ export default function FormPlace() {
                 />
             </View>
             <PickerImage />
+            <PickerLocation />
         </ScrollView>
     );
 }

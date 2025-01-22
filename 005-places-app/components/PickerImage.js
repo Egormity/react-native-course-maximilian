@@ -2,6 +2,7 @@ import { Alert, Image, Text, View } from "react-native";
 import { launchCameraAsync, useCameraPermissions, PermissionStatus } from "expo-image-picker";
 import { useState } from "react";
 import ButtonOutline from "./ButtonOutline";
+import { COLORS } from "../constants/colors";
 
 export default function PickerImage() {
     const [permissionInfo, requestPermission] = useCameraPermissions();
@@ -23,6 +24,7 @@ export default function PickerImage() {
 
     async function handleClick() {
         const status = await requestCameraPermission();
+        if (!status) return;
         const image = await launchCameraAsync({
             allowsEditing: true,
             aspect: [16, 5],
@@ -32,18 +34,21 @@ export default function PickerImage() {
     }
 
     return (
-        <View style={{ gap: 16 }}>
-            <View>
+        <View style={{}}>
+            <View style={{ height: 200, backgroundColor: COLORS.primary100, marginVertical: 10 }}>
                 {image ? (
                     <Image
                         source={{ uri: image?.uri }}
-                        style={{ width: "100%", height: 100 }}
+                        style={{ width: "100%", height: "100%" }}
                     />
                 ) : null}
             </View>
             <ButtonOutline
-                text="Take Image"
+                name="image"
+                color={COLORS.primary500}
+                text="Take an Image"
                 onPress={handleClick}
+                styleContainer={{ marginBottom: 10 }}
             />
         </View>
     );
